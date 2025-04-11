@@ -1,14 +1,22 @@
 "use client";
 
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 export default function Home() {
   const [inputUrl, setInputUrl] = useState("");
   const { push } = useRouter();
 
+  const createQueryString = (name: string, value: string) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  };
+
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    push("/htmlstat/abc" + "?" + createQueryString("inputUrl", inputUrl));
   };
 
   return (

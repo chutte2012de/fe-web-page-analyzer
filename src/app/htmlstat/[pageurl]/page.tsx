@@ -7,14 +7,17 @@ const getHtmlStat = async (inputPageUrl: string) => {
 };
 
 interface Params {
-  params: { pageurl: string };
+  params: { pageurl: string; inputUrl: string };
 }
 
-export default async function Page({ params }: Params) {
+export default async function Page({ params, searchParams }: any) {
   const htmlStatData = getHtmlStat(params.pageurl);
   const [htmlStat] = await Promise.all([htmlStatData]);
   return (
     <div>
+      <div>Parsed JSON: {JSON.stringify(params)}</div>
+      <div>Parsed JSON: {JSON.stringify(searchParams)}</div>
+      <div>{params.inputUrl}</div>
       <div>{params.pageurl}</div>
       <div>URL: {htmlStat?.url}</div>
       <div>Summary Id: {htmlStat?.summary_id}</div>
