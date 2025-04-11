@@ -16,7 +16,7 @@ export default function Home() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    push("/htmlstat/abc" + "?" + createQueryString("inputUrl", inputUrl));
+    push("/htmlstat" + "?" + createQueryString("inputUrl", inputUrl));
   };
 
   return (
