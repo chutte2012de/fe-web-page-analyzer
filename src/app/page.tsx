@@ -20,19 +20,27 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <div>
-        <h1>Enter the Web Page URL:</h1>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="p-4 shadow-md bg-white rounded-md">
+        <h1 className="text-2xl font-semibold mb-4 text-black">
+          Enter the Web Page URL:
+        </h1>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <input
+            type="url"
+            placeholder="Type or Paste the URL here..."
+            value={inputUrl}
+            className="w-full p-2 border border-gray-300 rounded text-black"
+            onChange={(e) => setInputUrl(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
+          >
+            Get HTML Stat
+          </button>
+        </form>
       </div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="url"
-          placeholder="Type or Paste the URL here..."
-          value={inputUrl}
-          onChange={(e) => setInputUrl(e.target.value)}
-        />
-        <button type="submit">Get HTML Stat</button>
-      </form>
     </div>
   );
 }
