@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 const getHtmlStat = async (inputPageUrl: string) => {
   const res = await fetch(`http://localhost:3000/webpage/htmlstat`, {
     body: JSON.stringify({ url: inputPageUrl }),
@@ -92,11 +94,40 @@ export default async function Page({ params, searchParams }: any) {
         </div>
 
         <div className="rounded-3xl bg-cyan-100 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-mono text-sm text-wrap">
-          <div>Parsed JSON: {JSON.stringify(searchParams)}</div>
-          <div>URL: {htmlStat?.url}</div>
-          <div>Summary Id: {htmlStat?.id}</div>
-          <div>Created At: {htmlStat?.created_at}</div>
-          <div>{JSON.stringify(htmlStat)}</div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Links Deatils</strong>
+          </div>
+          <br></br>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Internal</strong>
+          </div>
+          <br></br>
+          {htmlStat?.links_info?.detail?.internal?.map((data: any) => (
+            <div>
+              <div>
+                <strong>Url: {data.url}</strong>
+              </div>
+              <div>
+                Reachable: {data.reachable}, Status: {data.status}
+              </div>
+            </div>
+          ))}
+
+          <br></br>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>External</strong>
+          </div>
+          <br></br>
+          {htmlStat?.links_info?.detail?.external?.map((data: any) => (
+            <div>
+              <div>
+                <strong>Url: {data.url}</strong>
+              </div>
+              <div>
+                Reachable: {data.reachable}, Status: {data.status}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
