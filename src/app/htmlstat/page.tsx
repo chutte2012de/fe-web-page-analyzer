@@ -16,29 +16,81 @@ export default async function Page({ params, searchParams }: any) {
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3 p-4">
       <div className="p-8 space-y-3">
-        <div className="rounded-3xl bg-cyan-300 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-sans text-xl">
-          {/* <div className="tracking-wide text-lg text-indigo-500 font-semibold">
-            Input Web Page Url: {searchParams?.inputUrl}
-          </div>
-          <div className="block mt-1 text-sm leading-tight font-medium text-black">
-            Parsed JSON: {JSON.stringify(searchParams)}
-          </div> */}
-          <div className="block mt-1 text-sm leading-tight font-medium text-black">
+        <div className="font-sans text-lg font-medium text-black">
+          Results for: {searchParams?.inputUrl}
+        </div>
+        <div className="rounded-3xl bg-cyan-300 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-sans text-lg">
+          <div className="block mt-1 leading-tight font-medium text-black">
             <strong>URL:</strong> {htmlStat?.url}
           </div>
-          <div className="block mt-1 text-sm leading-tight font-medium text-black">
+          <div className="block mt-1 leading-tight font-medium text-black">
             <strong>Request Id:</strong> {htmlStat?.id}
           </div>
-          <div className="block mt-1 text-sm leading-tight font-medium text-black">
+          <div className="block mt-1 leading-tight font-medium text-black">
             <strong>Title:</strong> {htmlStat?.title}
           </div>
-          <div className="block mt-1 text-sm leading-tight font-medium text-black">
+          <div className="block mt-1 leading-tight font-medium text-black">
             <strong>Version:</strong> {htmlStat?.version}
           </div>
-          <div className="block mt-1 text-sm leading-tight font-medium text-black">
+          <div className="block mt-1 leading-tight font-medium text-black">
             <strong>Created At:</strong> {htmlStat?.created_at}
           </div>
         </div>
+
+        <div className="rounded-3xl bg-cyan-200 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-sans text-base">
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Links Info</strong>
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>External Total Count:</strong>{" "}
+            {htmlStat?.links_info?.summary?.external?.total_count}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>External Reachable Count:</strong>{" "}
+            {htmlStat?.links_info?.summary?.external?.reachable_count}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>External Unreachable Count:</strong>{" "}
+            {htmlStat?.links_info?.summary?.external?.unreachable_count}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Internal Total Count:</strong>{" "}
+            {htmlStat?.links_info?.summary?.internal?.total_count}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Internal Reachable Count:</strong>
+            {htmlStat?.links_info?.summary?.internal?.reachable_count}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Internal Unreachable Count:</strong>{" "}
+            {htmlStat?.links_info?.summary?.internal?.unreachable_count}
+          </div>
+        </div>
+
+        <div className="rounded-3xl bg-cyan-200 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-sans text-base">
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>Headers Info</strong>
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>H1 Count:</strong> {htmlStat?.headers?.h1}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>H2 Count:</strong> {htmlStat?.headers?.h2}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>H3 Count:</strong> {htmlStat?.headers?.h3}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>H4 Count:</strong> {htmlStat?.headers?.h4}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>H5 Count:</strong> {htmlStat?.headers?.h5}
+          </div>
+          <div className="block mt-1 leading-tight font-medium text-black">
+            <strong>H6 Count:</strong> {htmlStat?.headers?.h6}
+          </div>
+        </div>
+
         <div className="rounded-3xl bg-cyan-100 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-mono text-sm text-wrap">
           <div>Parsed JSON: {JSON.stringify(searchParams)}</div>
           <div>URL: {htmlStat?.url}</div>
