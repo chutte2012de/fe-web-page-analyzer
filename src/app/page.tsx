@@ -2,8 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
+import { useFormStatus } from "react-dom";
 
 export default function Home() {
+  const [processing, setProcessing] = useState(false);
   const [inputUrl, setInputUrl] = useState("");
   const { push } = useRouter();
 
@@ -16,11 +18,12 @@ export default function Home() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
+    setProcessing(true);
     push("/htmlstat" + "?" + createQueryString("inputUrl", inputUrl));
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
       <div className="p-4 shadow-md bg-white rounded-md">
         <h1 className="text-2xl font-semibold mb-4 text-black">
           Enter the Web Page URL:
@@ -28,12 +31,14 @@ export default function Home() {
         <form onSubmit={handleSubmit} className="space-y-3">
           <input
             type="url"
+            disabled={processing}
             placeholder="Type or Paste the URL here..."
             value={inputUrl}
             className="w-full p-2 border border-gray-300 rounded text-black"
             onChange={(e) => setInputUrl(e.target.value)}
           />
           <button
+            disabled={processing}
             type="submit"
             className="w-full py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
           >
@@ -41,6 +46,14 @@ export default function Home() {
           </button>
         </form>
       </div>
+      <br></br>
+      {processing ? (
+        <div className="rounded-xl bg-red-200 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-sans text-lg">
+          PROCESSSING... wait please
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 }
