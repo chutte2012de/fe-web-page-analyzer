@@ -119,47 +119,6 @@ export default async function Page({ searchParams }: any) {
                   <strong>H6 Count:</strong> {htmlStat?.headers?.h6}
                 </div>
               </div>
-
-              <div className="rounded-3xl bg-cyan-100 py-2 md:py-4 ps-2 md:ps-4 pe-2 md:pe-4 font-mono text-sm text-wrap">
-                <div className="block mt-1 leading-tight font-medium text-black">
-                  <strong>Links Deatils</strong>
-                </div>
-                <br></br>
-                <div className="block mt-1 leading-tight font-medium text-black">
-                  <strong>Internal</strong>
-                </div>
-                <br></br>
-                {htmlStat?.links_info?.detail?.internal?.map(
-                  (data: any, i: any) => (
-                    <div key={i}>
-                      <div>
-                        <strong>Url: {data.url}</strong>
-                      </div>
-                      <div>
-                        Reachable: {data.reachable}, Status: {data.status}
-                      </div>
-                    </div>
-                  )
-                )}
-
-                <br></br>
-                <div className="block mt-1 leading-tight font-medium text-black">
-                  <strong>External</strong>
-                </div>
-                <br></br>
-                {htmlStat?.links_info?.detail?.external?.map(
-                  (data: any, i: any) => (
-                    <div key={i}>
-                      <div>
-                        <strong>Url: {data.url}</strong>
-                      </div>
-                      <div>
-                        Reachable: {data.reachable}, Status: {data.status}
-                      </div>
-                    </div>
-                  )
-                )}
-              </div>
             </div>
           </div>
         ) : (
