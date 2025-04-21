@@ -2,18 +2,27 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 const getHtmlStat = async (inputPageUrl: string) => {
-  const res = await fetch(`http://localhost:3000/webpage/htmlstat`, {
-    body: JSON.stringify({ url: inputPageUrl }),
-    method: "POST",
-  });
-  const errorCode = res.ok ? false : res.status;
-  console.log("errorCode: ", errorCode);
-  if (errorCode) {
-    const errMsgAsString = await res.text();
-    console.log("errMsgAsString: ", errMsgAsString);
-    return { htmlStat: "", errorCode: errorCode, errorInfo: errMsgAsString };
+  try {
+    const res = await fetch(`http://localhost:3000/webpage/htmlstat`, {
+      body: JSON.stringify({ url: inputPageUrl }),
+      method: "POST",
+    });
+    const errorCode = res.ok ? false : res.status;
+    console.log("errorCode: ", errorCode);
+    if (errorCode) {
+      const errMsgAsString = await res.text();
+      console.log("errMsgAsString: ", errMsgAsString);
+      return { htmlStat: "", errorCode: errorCode, errorInfo: errMsgAsString };
+    }
+    return { htmlStat: await res.json(), errorCode: errorCode, errorInfo: "" };
+  } catch (error) {
+    console.error("Server action error:", error);
+    return {
+      htmlStat: "",
+      errorCode: 101,
+      errorInfo: "Error excuting backend server request",
+    };
   }
-  return { htmlStat: await res.json(), errorCode: errorCode, errorInfo: "" };
 };
 
 export default async function Page({ searchParams }: any) {
