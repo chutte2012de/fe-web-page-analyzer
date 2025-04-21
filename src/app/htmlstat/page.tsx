@@ -6,12 +6,20 @@ const getHtmlStat = async (inputPageUrl: string) => {
     body: JSON.stringify({ url: inputPageUrl }),
     method: "POST",
   });
-  return res.json();
+  const errorCode = res.ok ? false : res.status;
+  console.log("errorCode: ", errorCode);
+  if (errorCode) {
+    const errMsgAsString = await res.text();
+    console.log("errMsgAsString: ", errMsgAsString);
+    return { htmlStat: "", errorCode: errorCode, errorInfo: errMsgAsString };
+  }
+  return { htmlStat: await res.json(), errorCode: errorCode, errorInfo: "" };
 };
 
 export default async function Page({ searchParams }: any) {
-  const htmlStatData = getHtmlStat(searchParams.inputUrl);
-  const [htmlStat] = await Promise.all([htmlStatData]);
+  const { htmlStat, errorCode, errorInfo } = await getHtmlStat(
+    searchParams.inputUrl
+  );
   return (
     <section>
       <div>
