@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import { useFormStatus } from "react-dom";
 
 export default function Home() {
   const [processing, setProcessing] = useState(false);
@@ -18,8 +17,10 @@ export default function Home() {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    setProcessing(true);
-    push("/htmlstat" + "?" + createQueryString("inputUrl", inputUrl));
+    if (inputUrl.trim() !== "") {
+      setProcessing(true);
+      push("/htmlstat" + "?" + createQueryString("inputUrl", inputUrl));
+    }
   };
 
   return (
