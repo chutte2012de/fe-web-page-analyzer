@@ -1,4 +1,4 @@
-import { link } from "fs";
+import Link from "next/link";
 import { Suspense } from "react";
 
 const getHtmlStat = async (inputPageUrl: string) => {
@@ -9,15 +9,21 @@ const getHtmlStat = async (inputPageUrl: string) => {
   return res.json();
 };
 
-interface Params {
-  params: { pageurl: string; inputUrl: string };
-}
-
-export default async function Page({ params, searchParams }: any) {
+export default async function Page({ searchParams }: any) {
   const htmlStatData = getHtmlStat(searchParams.inputUrl);
   const [htmlStat] = await Promise.all([htmlStatData]);
   return (
     <section>
+      <div>
+        <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3 p-4">
+          <Link
+            className="flex justify-end text-blue-600 underline hover:text-blue-800"
+            href="/"
+          >
+            Go back Home
+          </Link>
+        </div>
+      </div>
       <Suspense fallback={<p>Loading feed...</p>}>
         <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl m-3 p-4">
           <div className="p-8 space-y-3">
